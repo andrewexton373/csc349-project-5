@@ -45,7 +45,7 @@ public class DiGraph {
     }
 
     private ArrayList<Integer> indegrees() {
-        ArrayList<Integer> Indegrees = new ArrayList<Integer>(N);
+        ArrayList<Integer> Indegrees = new ArrayList<Integer>(graph.size());
         int indegrees = 0;
 
         for (int current = 0; current < vertexCount(); current++) {
@@ -76,8 +76,9 @@ public class DiGraph {
         do {
             int idx = indegrees.indexOf((Integer) 0);
             if (idx != -1) {
+                System.out.println(idx);
                 queue.addFirst(idx + 1);
-                graph.remove((Integer) idx);
+                graph.remove(idx);
                 indegrees = indegrees();
             } else {
                 break;
