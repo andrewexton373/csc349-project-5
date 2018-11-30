@@ -56,6 +56,7 @@ public class DiGraph {
                 }
             }
             Indegrees.add(current, indegrees);
+            indegrees = 0;
         }
 
         return Indegrees;
@@ -65,6 +66,10 @@ public class DiGraph {
         // If graph is cyclic throw IllegalArgumentException
         LinkedList<Integer> queue = new LinkedList<Integer>();
         ArrayList<Integer> indegrees = indegrees();
+        for (Integer value : indegrees) {
+            System.out.print(value.intValue() + " ");
+        }
+        System.out.println();
 
         if (graph.size() == 0 || graph == null) return new ArrayList<Integer>();
 
