@@ -7,6 +7,7 @@
 
 import java.util.LinkedList;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class DiGraph {
     private ArrayList<LinkedList<Integer>> graph;
@@ -45,47 +46,71 @@ public class DiGraph {
     }
 
     private ArrayList<Integer> indegrees() {
-        ArrayList<Integer> Indegrees = new ArrayList<Integer>(graph.size());
-        int indegrees = 0;
+        int N = graph.size();
+        int[] Indegrees = new int[graph.size()];
+        ArrayList<Integer> f = new ArrayList<Integer>(graph.size());
 
-        for (int current = 0; current < vertexCount(); current++) {
-            for (int other = 0; other < vertexCount(); other++) {
-                if (current != other) {
-                    LinkedList<Integer> vertex = graph.get(other);
-                    if (vertex.contains((Integer)current)) indegrees++;
-                }
-            }
-            Indegrees.add(current, indegrees);
-            indegrees = 0;
+        for (int v = 0; v < N; v++) {
+            LinkedList<Integer> vertex = graph.get(v);
+            for (Integer i : vertex)
+                Indegrees[i.intValue()]++;
         }
 
-        return Indegrees;
+        for (int i = 0; i < N; i++)
+            f.add(i, Indegrees[i]);
+
+        return f;
     }
 
-    public ArrayList<Integer> topSort() {
+    public ArrayList<Integer> topSort() throws IllegalArgumentException {
         // If graph is cyclic throw IllegalArgumentException
+        int N = vertexCount();
         LinkedList<Integer> queue = new LinkedList<Integer>();
         ArrayList<Integer> indegrees = indegrees();
-        for (Integer value : indegrees) {
-            System.out.print(value.intValue() + " ");
+        for (int value : indegrees) {
+            System.out.print(value + " ");
         }
         System.out.println();
 
         if (graph.size() == 0 || graph == null) return new ArrayList<Integer>();
 
-        do {
-            int idx = indegrees.indexOf((Integer) 0);
-            if (idx != -1) {
-                System.out.println(idx);
-                queue.addFirst(idx + 1);
-                graph.remove(idx);
-                indegrees = indegrees();
-            } else {
-                break;
-            }
-        } while (true);
+        ArrayList<Integer> result = new ArrayList<Integer>();
+        // ArrayList<Integer> copy = new ArrayList<Integer>(graph);
 
-        return new ArrayList<Integer>(queue);
+        for (int i = 0; i < N; i++) {
+            if (indegrees.get(i).intValue() == 0) {
+                // int idx = indegrees.indexOf((Integer) 0);
+            // if (idx != -1) {
+                System.out.println(i);
+                queue.add(i);
+                result.add(i);
+            }
+        }
+
+        while (!queue.isEmpty()) {
+            System.out.println("QUEUE: " + queue.toString());
+            Integer vertex = queue.remove();
+            result.add(vertex);
+            System.out.println("vertex: " + vertex);
+
+            LinkedList<Integer> vertexes = graph.get(vertex);
+            System.out.println("CHECKING: " + vertexes.toString());
+            for (Integer edge : vertexes) {
+                System.out.println("indegrees: " + indegrees.toString());
+                indegrees.set(edge, indegrees.get(edge) - (Integer)1);
+                System.out.println("SUBTRACTING INDEGREE FROM: " + edge);
+                if (indegrees.get(edge) == (Integer)0) {
+                    System.out.println("Adding to queue: " + edge);
+                    queue.add(edge);
+                }
+            }
+
+        }
+
+        if (result.size() != N)
+            throw new IllegalArgumentException();
+
+        return new ArrayList<Integer>(result);
     }
 
 

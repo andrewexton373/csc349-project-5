@@ -54,9 +54,9 @@ public class DiGraphTest {
                         graph.topSort().toArray(arr);
                         int i;
                         for (i = 0; i < arr.length - 1; i++) {
-                            System.out.println(arr[i] + ", ");
+                            System.out.println((arr[i] + 1) + ", ");
                         }
-                        System.out.println(arr[i]);
+                        System.out.println(arr[i] + 1);
                         break;
                     case "q":
                         done = true;
