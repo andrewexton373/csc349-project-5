@@ -67,10 +67,10 @@ public class DiGraph {
         int N = vertexCount();
         LinkedList<Integer> queue = new LinkedList<Integer>();
         ArrayList<Integer> indegrees = indegrees();
-        for (int value : indegrees) {
-            System.out.print(value + " ");
-        }
-        System.out.println();
+        // for (int value : indegrees) {
+        //     System.out.print(value + " ");
+        // }
+        // System.out.println();
 
         if (graph.size() == 0 || graph == null) return new ArrayList<Integer>();
 
@@ -81,26 +81,24 @@ public class DiGraph {
             if (indegrees.get(i).intValue() == 0) {
                 // int idx = indegrees.indexOf((Integer) 0);
             // if (idx != -1) {
-                System.out.println(i);
                 queue.add(i);
-                result.add(i);
             }
         }
 
         while (!queue.isEmpty()) {
-            System.out.println("QUEUE: " + queue.toString());
+            // System.out.println("QUEUE: " + queue.toString());
             Integer vertex = queue.remove();
             result.add(vertex);
-            System.out.println("vertex: " + vertex);
+            // System.out.println("vertex: " + vertex);
 
             LinkedList<Integer> vertexes = graph.get(vertex);
-            System.out.println("CHECKING: " + vertexes.toString());
+            // System.out.println("CHECKING: " + vertexes.toString());
             for (Integer edge : vertexes) {
-                System.out.println("indegrees: " + indegrees.toString());
+                // System.out.println("indegrees: " + indegrees.toString());
                 indegrees.set(edge, indegrees.get(edge) - (Integer)1);
-                System.out.println("SUBTRACTING INDEGREE FROM: " + edge);
+                // System.out.println("SUBTRACTING INDEGREE FROM: " + edge);
                 if (indegrees.get(edge) == (Integer)0) {
-                    System.out.println("Adding to queue: " + edge);
+                    // System.out.println("Adding to queue: " + edge);
                     queue.add(edge);
                 }
             }

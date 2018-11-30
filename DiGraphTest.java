@@ -13,7 +13,7 @@ public class DiGraphTest {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
 
-        System.out.println("Enter number of vertices: ");
+        System.out.print("Enter number of vertices: ");
         DiGraph graph = new DiGraph(sc.nextInt());
 
         boolean done = false;
@@ -23,22 +23,23 @@ public class DiGraphTest {
         do {
 
             int from, to;
+            System.out.print("Enter operation: ");
 
             if (sc.hasNext()) {
                 switch (sc.next()) {
                     case "a":
-                        System.out.println("Add edge: <from> <to>");
+                        System.out.print("Add edge: ");
                         from = sc.nextInt();
                         to = sc.nextInt();
                         graph.addEdge(from, to);
-                        System.out.println(String.format("Added Edge:\n- From: %d\n- To: %d", from, to));
+                        System.out.println(String.format("\nAdded Edge:\n- From: %d\n- To: %d\n", from, to));
                         break;
                     case "d":
-                        System.out.println("Delete edge: <from> <to>");
+                        System.out.print("Delete edge: ");
                         from = sc.nextInt();
                         to = sc.nextInt();
                         graph.deleteEdge(from, to);
-                        System.out.println(String.format("Deleted Edge:\n- From: %d\n- To: %d", from, to));
+                        System.out.println(String.format("\nDeleted Edge:\n- From: %d\n- To: %d\n", from, to));
                         break;
                     case "e":
                         System.out.println("Number of edges is: " + graph.edgeCount());
@@ -53,6 +54,7 @@ public class DiGraphTest {
                         Integer[] arr = new Integer[graph.vertexCount()];
                         graph.topSort().toArray(arr);
                         int i;
+                        System.out.println("Topological Sort: ");
                         for (i = 0; i < arr.length - 1; i++) {
                             System.out.println((arr[i] + 1) + ", ");
                         }
