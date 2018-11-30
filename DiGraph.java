@@ -111,9 +111,6 @@ public class DiGraph {
         return new ArrayList<Integer>(result);
     }
 
-
-
-
     public void print() {
         int vertexes = vertexCount();
         for (int i = 0; i < vertexes; i++) {

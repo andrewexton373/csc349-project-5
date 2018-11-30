@@ -15,6 +15,7 @@ public class DiGraphTest {
 
         System.out.print("Enter number of vertices: ");
         DiGraph graph = new DiGraph(sc.nextInt());
+        sc.nextLine();
 
         boolean done = false;
 
@@ -27,15 +28,24 @@ public class DiGraphTest {
 
             if (sc.hasNextLine()) {
                 String input = sc.nextLine();
-                if (input.split(" ").length > 1) {
+                String[] lineInputs = input.split(" ");
+
+                // System.out.println("LINE INPUTS: " + lineInputs.length);
+                // for (String str : lineInputs) System.out.println(str);
+
+                if (lineInputs.length > 1) {
                     System.out.println("Invalid option.");
-                    break;
+                    continue;
                 }
-                switch (sc.next()) {
+
+                // System.out.println("CHOICE: " + lineInputs[0]);
+
+                switch (lineInputs[0]) {
                     case "a":
                         System.out.print("Add edge: ");
                         from = sc.nextInt();
                         to = sc.nextInt();
+                        sc.nextLine();
                         graph.addEdge(from, to);
                         System.out.println(String.format("\nAdded Edge:\n- From: %d\n- To: %d\n", from, to));
                         break;
@@ -44,6 +54,7 @@ public class DiGraphTest {
                         System.out.print("Delete edge: ");
                         from = sc.nextInt();
                         to = sc.nextInt();
+                        sc.nextLine();
                         graph.deleteEdge(from, to);
                         System.out.println(String.format("\nDeleted Edge:\n- From: %d\n- To: %d\n", from, to));
                         break;
