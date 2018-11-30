@@ -5,6 +5,7 @@
 * Part 1 & 2
 */
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Scanner;
 
@@ -48,6 +49,15 @@ public class DiGraphTest {
                     case "p":
                         graph.print();
                         break;
+                    case "t":
+                        Integer[] arr = new Integer[graph.vertexCount()];
+                        graph.topSort().toArray(arr);
+                        int i;
+                        for (i = 0; i < arr.length - 1; i++) {
+                            System.out.println(arr[i] + ", ");
+                        }
+                        System.out.println(arr[i]);
+                        break;
                     case "q":
                         done = true;
                         break;
@@ -55,8 +65,6 @@ public class DiGraphTest {
                         System.out.println("Invalid option.");
                 }
             }
-
-            
 
         } while (!done);
 
@@ -69,6 +77,7 @@ public class DiGraphTest {
         System.out.println("e - edge count");
         System.out.println("v - vertex count");
         System.out.println("p - print graph");
+        System.out.println("t - topological sort");
         System.out.println("q - Quit\n");
     }
 
