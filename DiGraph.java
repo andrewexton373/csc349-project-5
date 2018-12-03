@@ -22,7 +22,28 @@ public class DiGraph {
     }
 
     private class VertexInfo {
-        // private int cost
+        private int cost;
+        private int pred;
+
+        // TODO
+        private ArrayList<VertexInfo> BFS(int s) {
+            return null;
+        }
+
+        // TODO
+        public boolean isTherePath(int from, int to) {
+            return false;
+        }
+
+        // TODO
+        public int lengthOfPath(int from, int to) {
+            return -1;
+        }
+
+        // TODO
+        public void printPath(int from, int to) {
+            
+        }
     }
 
     public void addEdge(int from, int to) {
