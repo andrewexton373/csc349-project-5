@@ -131,4 +131,24 @@ public class DiGraph {
         }
     }
 
+    // this method prints the breadth-first-tree for a given source vertex s
+    public printTree(int s) {
+
+    }
+
+    // need to figure out params...
+    private printTree_AUX() {
+
+    }
+
+    // returns the root of the breadth-first-tree for the given source-vertex.
+    private TreeNode buildTree(int s) {
+
+    }
+
+    private class TreeNode {
+        int vertex_num;
+        LinkedList<TreeNode> vertex_children;
+    }
+
 }
