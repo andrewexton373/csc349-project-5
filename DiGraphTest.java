@@ -40,7 +40,7 @@ public class DiGraphTest {
                         to = sc.nextInt();
                         sc.nextLine();
                         graph.addEdge(from, to);
-                        System.out.println(String.format("\nAdded Edge:\n- From: %d\n- To: %d\n", from, to));
+                        System.out.println(String.format("\nAdded Edge: (%d, %d)\n", from, to));
                         break;
                     case "d":
                         System.out.print("Delete edge: ");
@@ -48,7 +48,7 @@ public class DiGraphTest {
                         to = sc.nextInt();
                         sc.nextLine();
                         graph.deleteEdge(from, to);
-                        System.out.println(String.format("\nDeleted Edge:\n- From: %d\n- To: %d\n", from, to));
+                        System.out.println(String.format("\nDeleted Edge: (%d, %d)\n", from, to));
                         break;
                     case "e":
                         System.out.println("Number of edges is: " + graph.edgeCount());
