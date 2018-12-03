@@ -19,6 +19,7 @@ public class DiGraphTest {
         boolean done = false;
 
         printMenu();
+        sc.nextLine();
 
         do {
 
@@ -27,6 +28,7 @@ public class DiGraphTest {
 
             if (sc.hasNext()) {
                 String input = sc.nextLine();
+
                 if (input.split(" ").length > 1) {
                     System.out.println("Invalid option.");
                     continue;
@@ -36,14 +38,15 @@ public class DiGraphTest {
                         System.out.print("Add edge: ");
                         from = sc.nextInt();
                         to = sc.nextInt();
+                        sc.nextLine();
                         graph.addEdge(from, to);
                         System.out.println(String.format("\nAdded Edge:\n- From: %d\n- To: %d\n", from, to));
                         break;
                     case "d":
-                        sc.nextLine();
                         System.out.print("Delete edge: ");
                         from = sc.nextInt();
                         to = sc.nextInt();
+                        sc.nextLine();
                         graph.deleteEdge(from, to);
                         System.out.println(String.format("\nDeleted Edge:\n- From: %d\n- To: %d\n", from, to));
                         break;
