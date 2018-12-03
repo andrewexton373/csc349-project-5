@@ -21,6 +21,10 @@ public class DiGraph {
         }
     }
 
+    private class VertexInfo {
+        // private int cost
+    }
+
     public void addEdge(int from, int to) {
         // check if already exists
         LinkedList<Integer> fromVertex = graph.get(from-1);

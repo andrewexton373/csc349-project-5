@@ -25,12 +25,13 @@ public class DiGraphTest {
             int from, to;
             System.out.print("Enter operation: ");
 
-            if (sc.hasNext()) {
-                String input = sc.nextLine();
-                if (input.split(" ").length > 1) {
-                    System.out.println("Invalid option.");
-                    continue;
-                }
+            // if (sc.hasNext()) {
+                String input = sc.next();
+                System.out.println(input);
+                // if (input.split(" ").length > 1) {
+                    // System.out.println("Invalid option. *");
+                    // continue;
+                // }
                 switch (input) {
                     case "a":
                         System.out.print("Add edge: ");
@@ -40,7 +41,7 @@ public class DiGraphTest {
                         System.out.println(String.format("\nAdded Edge:\n- From: %d\n- To: %d\n", from, to));
                         break;
                     case "d":
-                        sc.nextLine();
+                        // sc.nextLine();
                         System.out.print("Delete edge: ");
                         from = sc.nextInt();
                         to = sc.nextInt();
@@ -78,7 +79,7 @@ public class DiGraphTest {
                         sc.nextLine();
                         System.out.println("Invalid option.");
                 }
-            }
+            // }
 
         } while (!done);
 
