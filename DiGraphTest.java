@@ -15,7 +15,6 @@ public class DiGraphTest {
 
         System.out.print("Enter number of vertices: ");
         DiGraph graph = new DiGraph(sc.nextInt());
-        sc.nextLine();
 
         boolean done = false;
 
@@ -26,26 +25,17 @@ public class DiGraphTest {
             int from, to;
             System.out.print("Enter operation: ");
 
-            if (sc.hasNextLine()) {
+            if (sc.hasNext()) {
                 String input = sc.nextLine();
-                String[] lineInputs = input.split(" ");
-
-                // System.out.println("LINE INPUTS: " + lineInputs.length);
-                // for (String str : lineInputs) System.out.println(str);
-
-                if (lineInputs.length > 1) {
+                if (input.split(" ").length > 1) {
                     System.out.println("Invalid option.");
                     continue;
                 }
-
-                // System.out.println("CHOICE: " + lineInputs[0]);
-
-                switch (lineInputs[0]) {
+                switch (input) {
                     case "a":
                         System.out.print("Add edge: ");
                         from = sc.nextInt();
                         to = sc.nextInt();
-                        sc.nextLine();
                         graph.addEdge(from, to);
                         System.out.println(String.format("\nAdded Edge:\n- From: %d\n- To: %d\n", from, to));
                         break;
@@ -54,7 +44,6 @@ public class DiGraphTest {
                         System.out.print("Delete edge: ");
                         from = sc.nextInt();
                         to = sc.nextInt();
-                        sc.nextLine();
                         graph.deleteEdge(from, to);
                         System.out.println(String.format("\nDeleted Edge:\n- From: %d\n- To: %d\n", from, to));
                         break;
@@ -69,19 +58,24 @@ public class DiGraphTest {
                         break;
                     case "t":
                         Integer[] arr = new Integer[graph.vertexCount()];
-                        graph.topSort().toArray(arr);
-                        int i;
-                        System.out.println("Topological Sort: ");
-                        for (i = 0; i < arr.length - 1; i++) {
-                            System.out.println((arr[i] + 1) + ", ");
+                        try {
+                            graph.topSort().toArray(arr);
+                            int i;
+                            System.out.print("Topological Sort: ");
+                            for (i = 0; i < arr.length - 1; i++) {
+                                System.out.print((arr[i] + 1) + ", ");
+                            }
+                            System.out.println(arr[i] + 1);
+                        } catch (IllegalArgumentException e) {
+                            System.out.println("Graph is cyclic.");
                         }
-                        System.out.println(arr[i] + 1);
                         break;
                     case "q":
                         done = true;
                         System.out.println("Good Bye.");
                         break;
                     default:
+                        sc.nextLine();
                         System.out.println("Invalid option.");
                 }
             }
