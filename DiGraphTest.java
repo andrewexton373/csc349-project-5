@@ -23,7 +23,7 @@ public class DiGraphTest {
 
         do {
 
-            int from, to;
+            int from, to, source;
             System.out.print("Enter operation: ");
 
             if (sc.hasNext()) {
@@ -73,6 +73,11 @@ public class DiGraphTest {
                             System.out.println("Graph is cyclic.");
                         }
                         break;
+                    case "b":
+                        System.out.print("Source vertex: ");
+                        source = sc.nextInt();
+                        graph.printTree(source);
+                        break;
                     case "q":
                         done = true;
                         System.out.println("Good Bye.");
@@ -95,6 +100,7 @@ public class DiGraphTest {
         System.out.println("v - vertex count");
         System.out.println("p - print graph");
         System.out.println("t - topological sort");
+        System.out.println("b - print breadth-first-tree");
         System.out.println("q - Quit\n");
     }
 
