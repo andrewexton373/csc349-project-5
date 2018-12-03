@@ -73,6 +73,13 @@ public class DiGraphTest {
                             System.out.println("Graph is cyclic.");
                         }
                         break;
+                    case "i":
+                        break;
+                    case "l":
+                        break;
+                    case "s":
+                        break;
+
                     case "b":
                         System.out.print("Source vertex: ");
                         source = sc.nextInt();
@@ -100,6 +107,9 @@ public class DiGraphTest {
         System.out.println("v - vertex count");
         System.out.println("p - print graph");
         System.out.println("t - topological sort");
+        System.out.println("i - is there a path");
+        System.out.println("l - length of the path");
+        System.out.println("s - shortest path");
         System.out.println("b - print breadth-first-tree");
         System.out.println("q - Quit\n");
     }
