@@ -21,12 +21,38 @@ public class DiGraph {
         }
     }
 
-    private class VertexInfo {
-        private int cost;
+    public class VertexInfo {
+        private int length;
         private int pred;
 
+        public VertexInfo(int length, int pred) {
+            this.length = length;
+            this.pred = pred;
+        }
+
         // TODO
-        private ArrayList<VertexInfo> BFS(int s) {
+        public ArrayList<VertexInfo> BFS(int s) {
+            boolean visited[] = new boolean[N];
+
+            ArrayList<VertexInfo> bfs = new ArrayList<VertexInfo>(N);
+            for (VertexInfo v : bfs) {
+                v = new graph.VertexInfo(Integer.MAX_VALUE, -1);
+            }
+            // LinkedList<Integer> queue = new LinkedList<Integer>();
+            // visited[s] = true;
+            // queue.add(s);
+            //
+            // while (!queue.isEmpty) {
+            //     Integer current = queue.remove();
+            //     bfs.add(new VertexInfo(0, );
+            //     LinkedList<Integer> neighbors = graph.get(current);
+            //     for (Integer neighbor : neighbors) {
+            //         bfs.add()
+            //         bfs.get(neighbor);
+            //     }
+            // }
+
+
             return null;
         }
 
@@ -42,7 +68,7 @@ public class DiGraph {
 
         // TODO
         public void printPath(int from, int to) {
-            
+
         }
     }
 
@@ -104,8 +130,6 @@ public class DiGraph {
 
         for (int i = 0; i < N; i++) {
             if (indegrees.get(i).intValue() == 0) {
-                // int idx = indegrees.indexOf((Integer) 0);
-            // if (idx != -1) {
                 queue.add(i);
             }
         }
@@ -157,18 +181,18 @@ public class DiGraph {
     }
 
     // this method prints the breadth-first-tree for a given source vertex s
-    public printTree(int s) {
+    public void printTree(int s) {
 
     }
 
     // need to figure out params...
-    private printTree_AUX() {
+    private void printTree_AUX() {
 
     }
 
     // returns the root of the breadth-first-tree for the given source-vertex.
     private TreeNode buildTree(int s) {
-
+        return null;
     }
 
     private class TreeNode {

@@ -73,16 +73,39 @@ public class DiGraphTest {
                             System.out.println("Graph is cyclic.");
                         }
                         break;
+
+                    // DELETE WHEN DONE
+                    case "f":
+                        System.out.println("BFS: ");
+                        graph.VertexInfo.BFS(1);
+
                     case "i":
+                        System.out.print("Enter vertices: ");
+                        from = sc.nextInt();
+                        to = sc.nextInt();
+                        sc.nextLine();
+                        boolean isPath = graph.VertexInfo.isTherePath(from, to);
+                        System.out.println("Has path: " + isPath);
                         break;
                     case "l":
+                        System.out.print("Enter vertices: ");
+                        from = sc.nextInt();
+                        to = sc.nextInt();
+                        sc.nextLine();
+                        int length = graph.VertexInfo.lengthOfPath(from, to);
+                        System.out.println("Path length: " + length);
                         break;
                     case "s":
+                        System.out.print("Enter vertices: ");
+                        from = sc.nextInt();
+                        to = sc.nextInt();
+                        sc.nextLine();
+                        graph.printPath(from, to);
                         break;
-
                     case "b":
                         System.out.print("Source vertex: ");
                         source = sc.nextInt();
+                        sc.nextLine();
                         graph.printTree(source);
                         break;
                     case "q":
