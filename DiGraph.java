@@ -207,22 +207,30 @@ public class DiGraph {
     public void printTree(int s) {
         System.out.println("\n PRINTING TREE \n");
         TreeNode rootNode = buildTree(s - 1);
-        printTree_AUX(rootNode);
+        printTree_AUX(rootNode, 0);
     }
 
     // need to figure out params...
-    private void printTree_AUX(TreeNode node) {
+    private void printTree_AUX(TreeNode node, int level) {
 
-        if (node.vertex_children.isEmpty()) {
-            System.out.printf(" %d ", node.vertex_num + 1);
-        } else {
+        // System.out.println("# CHILDREN: " + node.vertex_children.size());
 
-            for (TreeNode child : node.vertex_children) {
-                printTree_AUX(child);
-            }
-            System.out.println();
+        for (int lvl = 0; lvl < level; lvl++) System.out.print("    ");
+        System.out.printf("%d\n", (int) node.vertex_num + 1);
+        // if (!node.vertex_children.isEmpty()) System.out.println();
+        for (TreeNode child : node.vertex_children) {
+            printTree_AUX(child, level + 1);
         }
+        // System.out.println();
 
+        // if (node.vertex_children.isEmpty()) {
+        //     System.out.printf(" %d ", node.vertex_num + 1);
+        // } else {
+        //     for (TreeNode child : node.vertex_children) {
+        //         printTree_AUX(child);
+        //     }
+        // }
+        // System.out.println();
     }
 
     // returns the root of the breadth-first-tree for the given source-vertex.
