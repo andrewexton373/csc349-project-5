@@ -7,6 +7,7 @@
 
 import java.util.LinkedList;
 import java.util.Queue;
+import java.util.Set;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -203,22 +204,65 @@ public class DiGraph {
 
     // this method prints the breadth-first-tree for a given source vertex s
     public void printTree(int s) {
-
+        System.out.println("\n PRINTING TREE \n");
+        TreeNode rootNode = buildTree(s);
+        printTree_AUX(rootNode);
     }
 
     // need to figure out params...
-    private void printTree_AUX() {
+    private void printTree_AUX(TreeNode node) {
+
+        if (node.vertex_children.isEmpty()) {
+            System.out.printf(" %d ", node.vertex_num + 1);
+        } else {
+
+            for (TreeNode child : node.vertex_children) {
+                printTree_AUX(child);
+            }
+            System.out.println();
+        }
 
     }
 
     // returns the root of the breadth-first-tree for the given source-vertex.
     private TreeNode buildTree(int s) {
-        return null;
+
+        TreeNode[] nodes = new TreeNode[N];
+        for (int vertNum = 0; vertNum < N; vertNum++) {
+            TreeNode node = new TreeNode();
+            node.vertex_children = new LinkedList<TreeNode>();
+            node.vertex_num = vertNum;
+            nodes[vertNum] = node;
+        }
+
+        ArrayList<VertexInfo> bfs = BFS(s);
+        for (VertexInfo info : bfs) {
+            Integer nodeNumber = bfs.indexOf(info);
+            Integer parent = info.pred;
+
+            if (parent != -1) {
+                TreeNode parentNode = nodes[parent];
+                parentNode.vertex_children.add(nodes[nodeNumber]);
+            }
+        }
+
+        for (int vertNum = 0; vertNum < N; vertNum++) {
+            System.out.println(nodes[vertNum]);
+        }
+
+        return nodes[s];
     }
 
     private class TreeNode {
         int vertex_num;
         LinkedList<TreeNode> vertex_children;
+
+        public String toString() {
+            String result = "NODE: vert " + ((int) vertex_num + 1) + " | ";
+            for (TreeNode child: vertex_children) result += child.vertex_num + 1;
+            result += "\n";
+            return result;
+        }
     }
 
 }
