@@ -6,6 +6,7 @@
 */
 
 import java.util.LinkedList;
+import java.util.Queue;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -22,27 +23,40 @@ public class DiGraph {
     }
 
     private class VertexInfo {
-        private int cost;
-        private int pred;
+        private int cost; // distance/length of path
+        private int pred; // predecessor/parent of vertex
 
         // TODO
         private ArrayList<VertexInfo> BFS(int s) {
+            Queue queue = new LinkedList<T>(); // not sure what type yet
+
+
+
             return null;
         }
 
         // TODO
+        // returns true if there is a path
+        // from "from" vertex to "to" vertex,
+        // false otherwise
         public boolean isTherePath(int from, int to) {
             return false;
         }
 
         // TODO
+        // returns the shortest path
+        // to the "to" vertex from the "from" vertex
         public int lengthOfPath(int from, int to) {
             return -1;
         }
 
         // TODO
+        // arranges the output of the shortest path
+        // from "from" vertex to "to" vertex
+        // IF it is reachable -> print natural numbering of path
+        // ELSE print "There is no path"
         public void printPath(int from, int to) {
-            
+            ArrayList<VertexInfo> results = BFS(from);
         }
     }
 
