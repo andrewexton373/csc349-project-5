@@ -35,7 +35,6 @@ public class DiGraph {
     }
 
     private ArrayList<VertexInfo> BFS(int s) {
-
         ArrayList<VertexInfo> bfs = new ArrayList<VertexInfo>(N);
         for (int vNum = 1; vNum <= N; vNum++) {
             bfs.add(new VertexInfo(Integer.MAX_VALUE, -1));
@@ -49,11 +48,13 @@ public class DiGraph {
             Integer current = queue.poll();
             VertexInfo currentInfo = bfs.get(current);
 
+            // System.out.println("CURRENT: " + ((int) current + 1));
+
             LinkedList<Integer> neighbors = graph.get(current);
             for (Integer neighbor : neighbors) {
                 VertexInfo neighborInfo = bfs.get(neighbor);
 
-                if (neighborInfo.length == Integer.MAX_VALUE || currentInfo.length + 1 < neighborInfo.length) {
+                if (currentInfo.length + 1 < neighborInfo.length) {
                     queue.add(neighbor);
                     bfs.set(neighbor, new VertexInfo(currentInfo.length + 1, current));
                 }
@@ -205,7 +206,7 @@ public class DiGraph {
     // this method prints the breadth-first-tree for a given source vertex s
     public void printTree(int s) {
         System.out.println("\n PRINTING TREE \n");
-        TreeNode rootNode = buildTree(s);
+        TreeNode rootNode = buildTree(s - 1);
         printTree_AUX(rootNode);
     }
 
@@ -240,15 +241,17 @@ public class DiGraph {
             Integer nodeNumber = bfs.indexOf(info);
             Integer parent = info.pred;
 
+            // System.out.println("VERT: " + ((int) nodeNumber + 1) + " PARENT: " + ((int) parent + 1));
+
             if (parent != -1) {
                 TreeNode parentNode = nodes[parent];
                 parentNode.vertex_children.add(nodes[nodeNumber]);
             }
         }
 
-        for (int vertNum = 0; vertNum < N; vertNum++) {
-            System.out.println(nodes[vertNum]);
-        }
+        // for (int vertNum = 0; vertNum < N; vertNum++) {
+        //     System.out.println(nodes[vertNum]);
+        // }
 
         return nodes[s];
     }
