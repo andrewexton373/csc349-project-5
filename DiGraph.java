@@ -36,11 +36,12 @@ public class DiGraph {
     private ArrayList<VertexInfo> BFS(int s) {
 
         ArrayList<VertexInfo> bfs = new ArrayList<VertexInfo>(N);
-        for (VertexInfo v : bfs) {
-            v = new graph.VertexInfo(Integer.MAX_VALUE, -1);
+        for (int vNum = 1; vNum <= N; vNum++) {
+            bfs.add(new VertexInfo(Integer.MAX_VALUE, -1));
         }
+        bfs.set(s, new VertexInfo(0, -1));
 
-        Queue queue = new LinkedList<Integer>();
+        Queue<Integer> queue = new LinkedList<Integer>();
         queue.add(s);
 
         while (!queue.isEmpty()) {
@@ -66,8 +67,8 @@ public class DiGraph {
     // from "from" vertex to "to" vertex,
     // false otherwise
     public boolean isTherePath(int from, int to) {
-        ArrayList<VertexInfo> bfs = BFS(from);
-        VertexInfo result = bfs.get(to);
+        ArrayList<VertexInfo> bfs = BFS(from - 1);
+        VertexInfo result = bfs.get(to - 1);
         if (result.length < Integer.MAX_VALUE)
             return true;
         else
@@ -78,8 +79,8 @@ public class DiGraph {
     // returns the shortest path
     // to the "to" vertex from the "from" vertex
     public int lengthOfPath(int from, int to) {
-        ArrayList<VertexInfo> bfs = BFS(from);
-        VertexInfo result = bfs.get(to);
+        ArrayList<VertexInfo> bfs = BFS(from - 1);
+        VertexInfo result = bfs.get(to - 1);
         return result.length;
     }
 
@@ -89,7 +90,7 @@ public class DiGraph {
     // IF it is reachable -> print natural numbering of path
     // ELSE print "There is no path"
     public void printPath(int from, int to) {
-        ArrayList<VertexInfo> results = BFS(from);
+        ArrayList<VertexInfo> results = BFS(from - 1);
     }
 
     public void addEdge(int from, int to) {
