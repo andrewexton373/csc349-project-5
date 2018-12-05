@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 public class DiGraph {
+
     private ArrayList<LinkedList<Integer>> graph;
     private int N;
 
@@ -22,7 +23,7 @@ public class DiGraph {
         }
     }
 
-    public class VertexInfo {
+    private class VertexInfo {
         private int length; // distance/length of path
         private int pred; // predecessor/parent of vertex
 
@@ -30,58 +31,65 @@ public class DiGraph {
             this.length = length;
             this.pred = pred;
         }
+    }
 
-        // TODO
-        public ArrayList<VertexInfo> BFS(int s) {
-            Queue queue = new LinkedList<T>(); // not sure what type yet
+    private ArrayList<VertexInfo> BFS(int s) {
 
-            boolean visited[] = new boolean[N];
+        ArrayList<VertexInfo> bfs = new ArrayList<VertexInfo>(N);
+        for (VertexInfo v : bfs) {
+            v = new graph.VertexInfo(Integer.MAX_VALUE, -1);
+        }
 
-            ArrayList<VertexInfo> bfs = new ArrayList<VertexInfo>(N);
-            for (VertexInfo v : bfs) {
-                v = new graph.VertexInfo(Integer.MAX_VALUE, -1);
+        Queue queue = new LinkedList<Integer>();
+        queue.add(s);
+
+        while (!queue.isEmpty()) {
+            Integer current = queue.poll();
+            VertexInfo currentInfo = bfs.get(current);
+
+            LinkedList<Integer> neighbors = graph.get(current);
+            for (Integer neighbor : neighbors) {
+                VertexInfo neighborInfo = bfs.get(neighbor);
+
+                if (neighborInfo.length == Integer.MAX_VALUE || currentInfo.length + 1 < neighborInfo.length) {
+                    queue.add(neighbor);
+                    bfs.set(neighbor, new VertexInfo(currentInfo.length + 1, current));
+                }
             }
-            // LinkedList<Integer> queue = new LinkedList<Integer>();
-            // visited[s] = true;
-            // queue.add(s);
-            //
-            // while (!queue.isEmpty) {
-            //     Integer current = queue.remove();
-            //     bfs.add(new VertexInfo(0, );
-            //     LinkedList<Integer> neighbors = graph.get(current);
-            //     for (Integer neighbor : neighbors) {
-            //         bfs.add()
-            //         bfs.get(neighbor);
-            //     }
-            // }
-
-
-            return null;
         }
 
-        // TODO
-        // returns true if there is a path
-        // from "from" vertex to "to" vertex,
-        // false otherwise
-        public boolean isTherePath(int from, int to) {
+        return bfs;
+    }
+
+    // TODO
+    // returns true if there is a path
+    // from "from" vertex to "to" vertex,
+    // false otherwise
+    public boolean isTherePath(int from, int to) {
+        ArrayList<VertexInfo> bfs = BFS(from);
+        VertexInfo result = bfs.get(to);
+        if (result.length < Integer.MAX_VALUE)
+            return true;
+        else
             return false;
-        }
+    }
 
-        // TODO
-        // returns the shortest path
-        // to the "to" vertex from the "from" vertex
-        public int lengthOfPath(int from, int to) {
-            return -1;
-        }
+    // TODO
+    // returns the shortest path
+    // to the "to" vertex from the "from" vertex
+    public int lengthOfPath(int from, int to) {
+        ArrayList<VertexInfo> bfs = BFS(from);
+        VertexInfo result = bfs.get(to);
+        return result.length;
+    }
 
-        // TODO
-        // arranges the output of the shortest path
-        // from "from" vertex to "to" vertex
-        // IF it is reachable -> print natural numbering of path
-        // ELSE print "There is no path"
-        public void printPath(int from, int to) {
-            ArrayList<VertexInfo> results = BFS(from);
-        }
+    // TODO
+    // arranges the output of the shortest path
+    // from "from" vertex to "to" vertex
+    // IF it is reachable -> print natural numbering of path
+    // ELSE print "There is no path"
+    public void printPath(int from, int to) {
+        ArrayList<VertexInfo> results = BFS(from);
     }
 
     public void addEdge(int from, int to) {
