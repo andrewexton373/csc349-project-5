@@ -2,8 +2,9 @@
 * Jett Moy - jlmoy
 * Andrew Exton - aexton
 * Project 5
-* Part 1 & 2
+* Part 1 & 2 & 3 & 4
 */
+
 
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -33,12 +34,16 @@ public class DiGraphTest {
                     System.out.println("Invalid option.");
                     continue;
                 }
+
+                System.out.println();
+
                 switch (input) {
                     case "a":
                         System.out.print("Add edge: ");
                         from = sc.nextInt();
                         to = sc.nextInt();
                         sc.nextLine();
+                        System.out.println();
                         graph.addEdge(from, to);
                         System.out.println(String.format("\nAdded Edge: (%d, %d)\n", from, to));
                         break;
@@ -47,6 +52,7 @@ public class DiGraphTest {
                         from = sc.nextInt();
                         to = sc.nextInt();
                         sc.nextLine();
+                        System.out.println();
                         graph.deleteEdge(from, to);
                         System.out.println(String.format("\nDeleted Edge: (%d, %d)\n", from, to));
                         break;
@@ -79,6 +85,7 @@ public class DiGraphTest {
                         from = sc.nextInt();
                         to = sc.nextInt();
                         sc.nextLine();
+                        System.out.println();
                         boolean isPath = graph.isTherePath(from, to);
                         System.out.println("Has path: " + isPath);
                         break;
@@ -87,6 +94,7 @@ public class DiGraphTest {
                         from = sc.nextInt();
                         to = sc.nextInt();
                         sc.nextLine();
+                        System.out.println();
                         System.out.println("Path length: " + graph.lengthOfPath(from, to));
                         break;
                     case "s":
@@ -94,12 +102,14 @@ public class DiGraphTest {
                         from = sc.nextInt();
                         to = sc.nextInt();
                         sc.nextLine();
+                        System.out.println();
                         graph.printPath(from, to);
                         break;
                     case "b":
                         System.out.print("Source vertex: ");
                         source = sc.nextInt();
                         sc.nextLine();
+                        System.out.println();
                         graph.printTree(source);
                         break;
                     case "q":
@@ -108,11 +118,14 @@ public class DiGraphTest {
                         break;
                     default:
                         sc.nextLine();
+                        System.out.println();
                         System.out.println("Invalid option.");
                 }
             }
 
         } while (!done);
+
+        sc.close();
 
     }
 

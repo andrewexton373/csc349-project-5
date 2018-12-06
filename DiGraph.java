@@ -2,12 +2,14 @@
 * Jett Moy - jlmoy
 * Andrew Exton - aexton
 * Project 5
-* Part 1 & 2
+* Part 1 & 2 & 3 & 4
 */
+
 
 import java.util.LinkedList;
 import java.util.Queue;
 import java.util.Set;
+import java.util.Stack;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -48,8 +50,6 @@ public class DiGraph {
             Integer current = queue.poll();
             VertexInfo currentInfo = bfs.get(current);
 
-            // System.out.println("CURRENT: " + ((int) current + 1));
-
             LinkedList<Integer> neighbors = graph.get(current);
             for (Integer neighbor : neighbors) {
                 VertexInfo neighborInfo = bfs.get(neighbor);
@@ -64,7 +64,6 @@ public class DiGraph {
         return bfs;
     }
 
-    // TODO
     // returns true if there is a path
     // from "from" vertex to "to" vertex,
     // false otherwise
@@ -77,8 +76,7 @@ public class DiGraph {
             return false;
     }
 
-    // TODO
-    // returns the shortest path
+    // returns the length of the shortest path
     // to the "to" vertex from the "from" vertex
     public int lengthOfPath(int from, int to) {
         ArrayList<VertexInfo> bfs = BFS(from - 1);
@@ -86,13 +84,28 @@ public class DiGraph {
         return result.length;
     }
 
-    // TODO
     // arranges the output of the shortest path
     // from "from" vertex to "to" vertex
     // IF it is reachable -> print natural numbering of path
     // ELSE print "There is no path"
     public void printPath(int from, int to) {
-        ArrayList<VertexInfo> results = BFS(from - 1);
+        ArrayList<VertexInfo> results = BFS(from-1);
+        VertexInfo toInfo = results.get(to-1);
+
+        Stack<Integer> path = new Stack<Integer>();
+        path.push(to);
+
+        int current = toInfo.pred;
+        while (current != -1) {
+            VertexInfo parentInfo = results.get(current);
+            path.push(current + 1);
+            current = parentInfo.pred;
+        }
+
+        while (!path.isEmpty()) {
+            System.out.printf("%d ", path.pop());
+        }
+        System.out.printf("\n");
     }
 
     public void addEdge(int from, int to) {
@@ -141,15 +154,10 @@ public class DiGraph {
         int N = vertexCount();
         LinkedList<Integer> queue = new LinkedList<Integer>();
         ArrayList<Integer> indegrees = indegrees();
-        // for (int value : indegrees) {
-        //     System.out.print(value + " ");
-        // }
-        // System.out.println();
 
         if (graph.size() == 0 || graph == null) return new ArrayList<Integer>();
 
         ArrayList<Integer> result = new ArrayList<Integer>();
-        // ArrayList<Integer> copy = new ArrayList<Integer>(graph);
 
         for (int i = 0; i < N; i++) {
             if (indegrees.get(i).intValue() == 0) {
@@ -158,19 +166,13 @@ public class DiGraph {
         }
 
         while (!queue.isEmpty()) {
-            // System.out.println("QUEUE: " + queue.toString());
             Integer vertex = queue.remove();
             result.add(vertex);
-            // System.out.println("vertex: " + vertex);
 
             LinkedList<Integer> vertexes = graph.get(vertex);
-            // System.out.println("CHECKING: " + vertexes.toString());
             for (Integer edge : vertexes) {
-                // System.out.println("indegrees: " + indegrees.toString());
                 indegrees.set(edge, indegrees.get(edge) - (Integer)1);
-                // System.out.println("SUBTRACTING INDEGREE FROM: " + edge);
                 if (indegrees.get(edge) == (Integer)0) {
-                    // System.out.println("Adding to queue: " + edge);
                     queue.add(edge);
                 }
             }
@@ -203,34 +205,32 @@ public class DiGraph {
         }
     }
 
-    // this method prints the breadth-first-tree for a given source vertex s
+    // this method prints the breadth-first-tree
+    // for a given source vertex s
     public void printTree(int s) {
-        System.out.println("\n PRINTING TREE \n");
+        System.out.printf("\nbreadth-first-tree (source: %d) \n", s);
         TreeNode rootNode = buildTree(s - 1);
         printTree_AUX(rootNode, 0);
+        System.out.println();
     }
 
-    // need to figure out params...
+    private void printPaddingTabs(int level) {
+        for (int lvl = 0; lvl < level; lvl++)
+            System.out.print("    ");
+    }
+
+    // Auxilary recursive method for printTree()
     private void printTree_AUX(TreeNode node, int level) {
 
-        // System.out.println("# CHILDREN: " + node.vertex_children.size());
+        printPaddingTabs(level);
 
-        for (int lvl = 0; lvl < level; lvl++) System.out.print("    ");
+        // Print vertex number
         System.out.printf("%d\n", (int) node.vertex_num + 1);
-        // if (!node.vertex_children.isEmpty()) System.out.println();
+
+        // Print children nodes
         for (TreeNode child : node.vertex_children) {
             printTree_AUX(child, level + 1);
         }
-        // System.out.println();
-
-        // if (node.vertex_children.isEmpty()) {
-        //     System.out.printf(" %d ", node.vertex_num + 1);
-        // } else {
-        //     for (TreeNode child : node.vertex_children) {
-        //         printTree_AUX(child);
-        //     }
-        // }
-        // System.out.println();
     }
 
     // returns the root of the breadth-first-tree for the given source-vertex.
@@ -249,17 +249,11 @@ public class DiGraph {
             Integer nodeNumber = bfs.indexOf(info);
             Integer parent = info.pred;
 
-            // System.out.println("VERT: " + ((int) nodeNumber + 1) + " PARENT: " + ((int) parent + 1));
-
-            if (parent != -1) {
+            if (parent != -1) { // if has a parent node
                 TreeNode parentNode = nodes[parent];
                 parentNode.vertex_children.add(nodes[nodeNumber]);
             }
         }
-
-        // for (int vertNum = 0; vertNum < N; vertNum++) {
-        //     System.out.println(nodes[vertNum]);
-        // }
 
         return nodes[s];
     }
