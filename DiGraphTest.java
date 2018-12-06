@@ -16,6 +16,7 @@ public class DiGraphTest {
 
         System.out.print("Enter number of vertices: ");
         DiGraph graph = new DiGraph(sc.nextInt());
+        System.out.println();
 
         boolean done = false;
 
